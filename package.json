@@ -1,0 +1,19 @@
+{
+  "name": "ercoffeelab",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:admin": "npm run dev --workspace=apps/admin",
+    "db:push": "npm run db:push --workspace=apps/api",
+    "db:seed": "npm run db:seed --workspace=apps/api",
+    "db:studio": "npm run db:studio --workspace=apps/api",
+    "dev:api": "npm run dev --workspace=apps/api"
+  },
+  "dependencies": {
+    "expo-router": "~57.0.12",
+    "expo-secure-store": "~57.0.1"
+  }
+}
