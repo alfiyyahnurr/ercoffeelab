@@ -11,6 +11,7 @@
     "db:seed": "npm run db:seed --workspace=apps/api",
     "dev:api": "npm run dev --workspace=apps/api",
     "dev:mobile": "npm run start --workspace=apps/mobile",
+    "build:mobile": "npm run build --workspace=apps/mobile",
     "push:all": "git push origin main && git subtree push --prefix=apps/api repo-api main && git subtree push --prefix=apps/admin repo-admin main && git subtree push --prefix=apps/mobile repo-mobile main",
     "push:api": "git subtree push --prefix=apps/api repo-api main",
     "push:admin": "git subtree push --prefix=apps/admin repo-admin main",
