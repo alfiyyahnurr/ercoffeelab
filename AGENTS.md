@@ -33,6 +33,13 @@ Tiap `apps/*/docs/` punya struktur sama: `prd.md`, `architecture.md`, `erd.md`, 
 
 ### Backend (`apps/api`)
 - Query database pakai **raw SQL** via `sql` dari `src/db/client.ts` (`@neondatabase/serverless`). **JANGAN** pakai Drizzle query builder di route handler — Drizzle cuma untuk `db:push` (migration) dan `seed.ts`.
+- **SINKRONISASI SKEMA DATABASE (WAJIB SESUAI & SELARAS)**:
+  Setiap kali ada **penambahan tabel baru, perubahan kolom, tipe data, atau index** selama pengerjaan:
+  1. `apps/api/src/db/schema.ts` (Drizzle schema) **WAJIB diupdate**.
+  2. `apps/api/src/db/schema.sql` (Raw DDL SQL) **WAJIB diupdate agar 100% identik**.
+  3. `apps/api/src/db/seed.ts` **WAJIB diupdate** jika ada data default baru.
+  4. Dokumen `apps/api/docs/erd.md` **WAJIB dicatat**.
+  Hal ini mutlak agar saat database dipindahkan / di-migrate ke database baru (`npm run db:push` / eksekusi `schema.sql`), seluruh struktur tabel dan relasi langsung sesuai dan tidak ada mismatch.
 - Auth selalu lewat `requireCustomer()` / `requireStaff()` dari `lib/auth-middleware.ts`. Jangan bikin cara cek token baru.
 - **outlet_admin WAJIB difilter `outlet_id`** di setiap query yang scoped-outlet (pengganti RLS Supabase yang sudah tidak ada). Lupa filter ini = celah keamanan.
 - Response sukses: object langsung (single) atau `{ data: [...] }` (list). Error: `{ error: "pesan" }` + HTTP status yang tepat.
