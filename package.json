@@ -9,9 +9,12 @@
     "dev:admin": "npm run dev --workspace=apps/admin",
     "db:push": "npm run db:push --workspace=apps/api",
     "db:seed": "npm run db:seed --workspace=apps/api",
-    "db:studio": "npm run db:studio --workspace=apps/api",
     "dev:api": "npm run dev --workspace=apps/api",
-    "dev:mobile": "npm run start --workspace=apps/mobile"
+    "dev:mobile": "npm run start --workspace=apps/mobile",
+    "push:all": "git push origin main && git subtree push --prefix=apps/api repo-api main && git subtree push --prefix=apps/admin repo-admin main && git subtree push --prefix=apps/mobile repo-mobile main",
+    "push:api": "git subtree push --prefix=apps/api repo-api main",
+    "push:admin": "git subtree push --prefix=apps/admin repo-admin main",
+    "push:mobile": "git subtree push --prefix=apps/mobile repo-mobile main"
   },
   "dependencies": {
     "expo-router": "~57.0.12",
