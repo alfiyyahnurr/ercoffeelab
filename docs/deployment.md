@@ -10,8 +10,10 @@ Satu repo Git, dipetakan ke beberapa **Vercel Project** terpisah lewat "Root Dir
 
 ## Environment variables
 Diisi terpisah per Vercel Project (Settings → Environment Variables):
-- `ercoffeelab-api`: semua isi `apps/api/.env.example`
-- `ercoffeelab-admin`: `NEXT_PUBLIC_API_URL` = URL project `ercoffeelab-api` yang sudah live
+- `ercoffeelab-api`: semua isi `apps/api/.env.example` (DATABASE_URL, JWT_SECRET, APP_URL, ADMIN_PANEL_URL, MIDTRANS, FONNTE, dll)
+- `ercoffeelab-admin`: `NEXT_PUBLIC_API_URL` = URL project `ercoffeelab-api` (misal: `https://ercoffeelab-api.vercel.app`)
+- `ercoffeelab-mobile`: `EXPO_PUBLIC_API_URL` = URL project `ercoffeelab-api` (misal: `https://ercoffeelab-api.vercel.app`)
+  > **PENTING**: Di Expo/React Native Web, variabel `EXPO_PUBLIC_*` di-*bake/inline* ke dalam bundle JS saat **Build Time**. Jadi setelah menambahkan env di Vercel Dashboard, lakukan **Redeploy** (tanpa build cache).
 
 ## Batasi rebuild tidak perlu (opsional)
 Karena 2 project baca repo yang sama, push ke `apps/admin` bisa trigger rebuild `apps/api` juga kalau tidak diatur. Di Settings → Git → "Ignored Build Step" tiap project:
